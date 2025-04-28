@@ -1,0 +1,23 @@
+{
+  "name": "clo2_tb_kpl",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaka166/CLO2_TB_KPL.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaka166/CLO2_TB_KPL/issues"
+  },
+  "homepage": "https://github.com/kaka166/CLO2_TB_KPL#readme",
+  "description": "",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
+}
