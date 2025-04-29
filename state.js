@@ -27,14 +27,50 @@ function runApp() {
 
   while (true) {
     console.log("\n=== Menu ===");
-        console.log("1. Tambah ke Keranjang");
-        console.log("2. Lihat Keranjang");
-        console.log("3. Update Jumlah di Keranjang");
-        console.log("4. Hapus Item dari Keranjang");
-        console.log("5. Checkout");
-        console.log("6. Keluar");
+    console.log("1. Tambah ke Keranjang");
+    console.log("2. Lihat Keranjang");
+      console.log("3. Update Jumlah di Keranjang");
+      console.log("4. Hapus Item dari Keranjang");
+      console.log("5. Checkout");
+      console.log("6. Keluar");
     
-        const choice = input("Pilih opsi: ");
+      const choice = input("Pilih opsi: ");
+
+      switch (choice) {
+        case "1":
+          const menuId = parseInt(input("Masukkan ID menu : "));
+          const quantity = parent(input("Masukan jumlah : "));
+          const menuItem = selectedWarung.menu.find(m => m.id === menuId);
+          if (menuItem) {
+            addToCart(menuItem, quantity);
+            console.log("Item ditambahkan ke Keranjang.");
+          } else {
+            console.log("Menu tidak ditemukan ")
+          } 
+        break;
+      case "2":
+        ViewCart();
+        break;
+      case "3":
+        const updateId = parseInt(input("Masukan ID menu untuk update : "));
+        const newQty = parseInt(input("Masukan jumlah baru : "));
+        updateCart(updateId, newQty);
+        console.log("jumlah item diperbarui.");
+        break;
+      case "4":
+        const deleteId = parseInt(input("Masukan ID menu untuk hapus : "));
+        removeFromCart(deleteId);
+        console.log("Item dihapus dari keranjang")
+        break;
+      case "5":
+        checkout();
+        return; 
+      case "6":
+        console.log("Terima kasih telah menggunakan aplikasi kami.");
+        return;
+      default:
+        console.log("Pilihan tidak valid.");     
+    }
   }
 }
 
