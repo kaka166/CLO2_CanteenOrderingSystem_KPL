@@ -9,12 +9,13 @@ function GenerateOrderDate() {
     return date.toISOString().replace('T', ' ').split('.')[0];
 }
 
-function input (message)
- {
+function input (message){
     return prompt(message);
  }
 
-Medule.exports = {
+// function 
+
+Module.exports = {
     GenerateOrderId,
     GenerateOrderDate,
     input
