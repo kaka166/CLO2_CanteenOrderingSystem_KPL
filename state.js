@@ -1,7 +1,7 @@
-// const { warungs } = require('./config');
-// const { addToCart, viewCart, updateCart, removeFromCart } = require('./cart');
-// const { checkout } = require('./order');
-// const { input } = require('./utils');
+const { warungs } = require('./config');
+const { addToCart, viewCart, updateCart, removeFromCart } = require('./cart');
+const { checkout } = require('./order');
+const { input } = require('./utils');
 
 function runApp() {
   console.log("=== Selamat datang di Canteen Ordering System ===");
@@ -39,7 +39,7 @@ function runApp() {
       switch (choice) {
         case "1":
           const menuId = parseInt(input("Masukkan ID menu : "));
-          const quantity = parent(input("Masukan jumlah : "));
+          const quantity = parseInt(input("Masukan jumlah : "));
           const menuItem = selectedWarung.menu.find(m => m.id === menuId);
           if (menuItem) {
             addToCart(menuItem, quantity);
@@ -49,7 +49,7 @@ function runApp() {
           } 
         break;
       case "2":
-        ViewCart();
+        viewCart();
         break;
       case "3":
         const updateId = parseInt(input("Masukan ID menu untuk update : "));

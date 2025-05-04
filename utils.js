@@ -1,10 +1,10 @@
 const prompt = require('prompt-sync')();
 
-function GenerateOrderId() {
+function generateOrderId() {
     return Math.floor(100000 + Math.random() * 9000000);
 }
 
-function GenerateOrderDate() {
+function generateOrderDate() {
     const date = new Date();
     return date.toISOString().replace('T', ' ').split('.')[0];
 }
@@ -14,7 +14,7 @@ function input (message){
  }
 
 module.exports = {
-    GenerateOrderId,
-    GenerateOrderDate,
+    generateOrderId,
+    generateOrderDate,
     input
 };
