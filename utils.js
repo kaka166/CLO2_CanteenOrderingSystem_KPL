@@ -13,9 +13,7 @@ function input (message){
     return prompt(message);
  }
 
-// function 
-
-Module.exports = {
+module.exports = {
     GenerateOrderId,
     GenerateOrderDate,
     input
