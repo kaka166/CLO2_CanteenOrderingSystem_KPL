@@ -1,5 +1,5 @@
 const { getCart, clearCart } = require('./cart');
-const { generateOrderId, input } = require('./utils');
+const { generateOrderId, input, generateOrderDate } = require('./utils');
 
 function checkout() {
   const cart = getCart();
@@ -11,7 +11,9 @@ function checkout() {
 
   console.log("\n=== Checkout ===");
   const orderId = generateOrderId();
+  const orderDate = generateOrderDate();
   console.log(`No. Order: ${orderId}`);
+  console.log(`Tanggal: ${orderDate}`);
   let total = 0;
 
   cart.forEach(c => {
