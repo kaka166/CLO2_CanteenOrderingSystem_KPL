@@ -1,7 +1,7 @@
-const { warungs } = require('./config');
-const { addToCart, viewCart, updateCart, removeFromCart } = require('./cart');
-const { checkout } = require('./order');
-const { input } = require('./utils');
+const { warungs } = require("./config");
+const { addToCart, viewCart, updateCart, removeFromCart } = require("./cart");
+const { checkout } = require("./order");
+const { input } = require("./utils");
 
 function runApp() {
   console.log("=== Selamat datang di Canteen Ordering System ===");
@@ -10,18 +10,20 @@ function runApp() {
   console.log(`Halo, ${username}!\n`);
 
   console.log("Pilih Warung:");
-  warungs.forEach(w => console.log(`${w.id}. ${w.name}`));
+  warungs.forEach((w) => console.log(`${w.id}. ${w.name}`));
 
-  const warungId = parseInt(input("Masukkan nomor warung: "));
-  const selectedWarung = warungs.find(w => w.id === warungId);
+  let selectedWarung = null;
+  while (!selectedWarung) {
+    const warungId = parseInt(input("Masukkan nomor warung: "));
+    selectedWarung = warungs.find((w) => w.id === warungId);
 
-  if (!selectedWarung) {
-    console.log("Warung tidak ditemukan.");
-    return;
+    if (!selectedWarung) {
+      console.log("Warung tidak ditemukan. Silakan coba lagi.\n");
+    }
   }
 
   console.log(`\nMenu di ${selectedWarung.name}:`);
-  selectedWarung.menu.forEach(m => {
+  selectedWarung.menu.forEach((m) => {
     console.log(`${m.id}. ${m.name} - Rp${m.price}`);
   });
 
@@ -29,47 +31,66 @@ function runApp() {
     console.log("\n=== Menu ===");
     console.log("1. Tambah ke Keranjang");
     console.log("2. Lihat Keranjang");
-      console.log("3. Update Jumlah di Keranjang");
-      console.log("4. Hapus Item dari Keranjang");
-      console.log("5. Checkout");
-      console.log("6. Keluar");
-    
-      const choice = input("Pilih opsi: ");
+    console.log("3. Update Jumlah di Keranjang");
+    console.log("4. Hapus Item dari Keranjang");
+    console.log("5. Checkout");
+    console.log("6. Keluar");
 
-      switch (choice) {
-        case "1":
-          const menuId = parseInt(input("Masukkan ID menu : "));
-          const quantity = parseInt(input("Masukan jumlah : "));
-          const menuItem = selectedWarung.menu.find(m => m.id === menuId);
-          if (menuItem) {
-            addToCart(menuItem, quantity);
-            console.log("Item ditambahkan ke Keranjang.");
-          } else {
-            console.log("Menu tidak ditemukan ")
-          } 
+    const choice = input("Pilih opsi: ");
+
+    switch (choice) {
+      case "1":
+        const menuId = parseInt(input("Masukkan ID menu : "));
+        const menuItem = selectedWarung.menu.find((m) => m.id === menuId);
+
+        if (!menuItem) {
+          console.log("Menu tidak ditemukan.");
+          break;
+        }
+
+        const quantity = parseInt(input("Masukkan jumlah : "));
+        if (isNaN(quantity) || quantity <= 0) {
+          console.log("Jumlah tidak valid.");
+          break;
+        }
+
+        addToCart(menuItem, quantity);
+        console.log("Item ditambahkan ke Keranjang.");
         break;
       case "2":
         viewCart();
         break;
       case "3":
         const updateId = parseInt(input("Masukan ID menu untuk update : "));
+        const menuToUpdate = selectedWarung.menu.find((m) => m.id === updateId);
+
+        if (!menuToUpdate) {
+          console.log("Menu tidak ditemukan.");
+          break;
+        }
+
         const newQty = parseInt(input("Masukan jumlah baru : "));
+        if (isNaN(newQty) || newQty <= 0) {
+          console.log("Jumlah tidak valid.");
+          break;
+        }
+
         updateCart(updateId, newQty);
-        console.log("jumlah item diperbarui.");
+        console.log("Jumlah item diperbarui.");
         break;
       case "4":
         const deleteId = parseInt(input("Masukan ID menu untuk hapus : "));
         removeFromCart(deleteId);
-        console.log("Item dihapus dari keranjang")
+        console.log("Item dihapus dari keranjang");
         break;
       case "5":
         checkout();
-        return; 
+        return;
       case "6":
         console.log("Terima kasih telah menggunakan aplikasi kami.");
         return;
       default:
-        console.log("Pilihan tidak valid.");     
+        console.log("Pilihan tidak valid.");
     }
   }
 }
