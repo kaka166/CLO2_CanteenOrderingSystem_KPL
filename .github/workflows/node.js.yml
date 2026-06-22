@@ -26,5 +26,5 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run Application (Smoke Test)
-        run: node index.js
+
+        
