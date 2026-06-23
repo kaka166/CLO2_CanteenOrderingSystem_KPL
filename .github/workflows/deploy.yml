@@ -1,0 +1,19 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches: [main, ardhian]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Upload Project Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: canteen-ordering-system
+          path: .
